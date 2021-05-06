@@ -28,3 +28,17 @@ if(playerInput == 1){
 }
 
 printMessage('Ruch gracza to: ' + playerMove);
+
+if (playerMove!='nieznany ruch'){
+	
+	if(computerMove == playerMove){
+		printMessage('Remis!');
+	} else if( (computerMove == 'papier' && playerMove == 'kamień') || (computerMove == 'kamień' && playerMove == 'nożyce') || (computerMove == 'nożyce' && playerMove == 'papier')){
+		printMessage('Wygrywa komputer!');
+	} else if((playerMove == 'papier' && computerMove == 'kamień') || (playerMove == 'kamień' && computerMove == 'nożyce') || (playerMove == 'nożyce' && computerMove == 'papier')){
+		printMessage('Wygrywasz!');
+	}
+
+} else {
+	printMessage('Nieznany ruch gracza!');
+}	
