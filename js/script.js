@@ -1,3 +1,7 @@
+let computerWin = 0;
+let playerWin =0;
+let result; 
+
 function playGame(arg){
 	
 	clearMessages();
@@ -33,19 +37,20 @@ function playGame(arg){
 		if (argPlayerMove!='nieznany ruch'){
 		
 			if(argComputerMove == argPlayerMove){
-				console.log('Remis!');
-				printMessage('Remis!');
+				printMessage('Remis!'); 
+				return;
 			} else if( (argComputerMove == 'papier' && argPlayerMove == 'kamień') || (argComputerMove == 'kamień' && argPlayerMove == 'nożyce') || (argComputerMove == 'nożyce' && argPlayerMove == 'papier')){
-				console.log('Wygrana komputera!');
-				printMessage('Wygrywa komputer!');
+				printMessage('Wygrywa komputer!'); 
+				return false;
 			} else if((argPlayerMove == 'papier' && argComputerMove == 'kamień') || (argPlayerMove == 'kamień' && argComputerMove == 'nożyce') || (argPlayerMove == 'nożyce' && argComputerMove == 'papier')){
-				console.log('Wygrana gracza!');
-				printMessage('Wygrywasz!');
+				printMessage('Wygrywasz!'); 
+				return true;
 			}
 
 		} else {
 			console.log('Ruch > 3 lub ruch < 1!');
 			printMessage('Nieznany ruch gracza!');
+			return;
 		}
 	}
 
@@ -67,16 +72,27 @@ function playGame(arg){
 	printMessage('Ruch gracza to: ' + playerMove);
 
 
-	displayResult(computerMove, playerMove);
+	return displayResult(computerMove, playerMove);
 		
 }
 
 document.getElementById('rock').addEventListener('click', function(){
-	playGame(1);
+	counter(playGame(1));
 });
 document.getElementById('paper').addEventListener('click', function(){
-	playGame(2);
+	counter(playGame(2));
 });
 document.getElementById('shears').addEventListener('click', function(){
-	playGame(3);
+	counter(playGame(3));
 });
+
+function counter(result){
+	
+	clearResult();
+	
+	if (result !== undefined){
+		if(result) playerWin++;
+		else computerWin++;
+	}
+	printResult('Punkty komputera: ' + computerWin + '    Punkty gracza: ' + playerWin);
+}
